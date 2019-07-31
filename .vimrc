@@ -1,76 +1,148 @@
+" Note, I use Neovim and this configuration is stored in
+" ~/config/nvim/init.vim
 execute pathogen#infect()
-syntax on
-set clipboard=unnamed
-set nocompatible
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set smarttab
-set expandtab
-set number
-imap <silent> jj <Esc>:update<Enter>
-imap <silent> ;; <Esc>
+""" Quick Reference/Table of Contents
+"""
+"" User
+"--------------------------------
+" ctrlp - <leader> t
+" gundo - <leader> u
+" nerdtree - <leader> e
+" vim-commentary - <select_text> gc
+" vim-fugitive - <leader> i
+" vim-indent-guides - <leader> ig
+" vim-multiple-cursors - <C-n>
+" vim-yankstack - <leader> p/P *
+"
+" " Passive
+" -------------------------------
+" YouCompleteMe - tab
+" lightline
+" nerdtree-git
+" vim-endwise
+" vim-gitgutter
+" vim-lastplace
+" vim-rails
+" vim-test
+" vimux
 
-"" custom mappings
-" yes, my leader key is spacebar. Try it.
-let mapleader=" "
+" configurations
+  syntax on
+  set nocompatible
+  set clipboard=unnamed " use system clipboard for yanks
+  set undofile " persist undo history after closing vim
+  set undodir=~/.config/nvim/.undo
+  set tabstop=2
+  set shiftwidth=2
+  set softtabstop=2
+  set smarttab
+  set expandtab
+  set number
+  set nowrap
+  set backspace=indent,eol,start " more intuitive navigation when hitting backspace
+  set laststatus=2
+  set noshowmode
+  set scrolloff=300
+  set sidescrolloff=1
+  set sidescroll=1
+  set ttyfast
+  noremap <Up> <NOP>
+  noremap <Down> <NOP>
+  noremap <Left> <NOP>
+  noremap <Right> <NOP
+  autocmd VimResized * :wincmd =
 
-" ctrlp options
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_map = '<leader>t'
-let g:ctrlp_working_path_mode = 2
-let g:ctrlp_custom_ignore = '_site\|node_modules\|\.git$\|\.svn$|\.swp$|\.o$|'
-set wildignore+=*.o,*.obj,.git,*.swp,tmp
-map <leader>b :CtrlPBuffer<cr>
+" mappings
+" typing 'jj' while in insert mode saves your file and enters normal mode
+  imap <silent> jj <Esc>:update<Enter>
+  let mapleader=" "
 
-"" remove trailing whitespaces
-map <leader>T  :%s/\s\s*$//g<cr>
+" whitespace
+  :highlight ExtraWhitespace ctermbg=darkblue guibg=darkblue
+  :match ExtraWhitespace /\s\+$/
+  map <leader>w  :%s/\s\s*$//g<cr>
 
-" Hitting the spacebar is easier than hitting colon.
-map <leader>w <Esc>:w
-map <leader>q <Esc>:q
+" " User
+"|------------------------------------------------------------------------------|
 
-" Whitespace
-:highlight ExtraWhitespace ctermbg=darkblue guibg=darkblue
-:match ExtraWhitespace /\s\+$/
+" ctrlp - <leader> t
+  let g:ctrlp_map = '<leader>t'
+  map <leader>b :CtrlPBuffer<cr>
+  set runtimepath^=~/.config/nvim/bundle/ctrlp.vim/autoload/ctrlp.vim
+  let g:ctrlp_working_path_mode = 2
+  let g:ctrlp_custom_ignore = '_site\|node_modules\|\.git$\|\.svn$|\.swp$|\.o$|'
+  set wildignore+=*.o,*.obj,.git,*.swp,tmp
 
-" Wrapped text is nightmare fuel.
-set nowrap
+" gundo - <leader> u
+  map <leader>u :GundoToggle<CR>
 
-" When you're at the beginning of a line, backspace will move to the end of
-" the line above it instead of the default.
-set backspace=indent,eol,start
-set laststatus=2
-set ttyfast
+" nerdtree - <leader> e - I don't really use it, but I guess it could be
+" helpful
+  map <leader>e :NERDTreeToggle<CR>
 
-" This is a temporary disabling of the arrow keys, because many vim people
-" will tell you to use HJKL instead. While I appreciate that in theory, I
-" think it's a load of BS... But I wanted to force myself into HJKL life for a
-" few months before I spoke on the subject. We're on month two and I'm
-" burning this with fire soon:
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" vim-commentary - <select_text> gc
 
-" RSpec bindings
-let g:rspec_command = "VtrSendCommandToRunner! rspec {spec}"
-map <Leader>r :call RunCurrentSpecFile()<CR>
-map <Leader>n :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+" vim-fugitive - <leader> i
+  map <leader>i :Gstatus<CR>
 
-" This are mainly used for RSpec and debugging, though their functionality could be
-" multi-purpose
-map <Leader>ap :VtrAttachToPane()<CR>
-map <Leader>s :VtrSendLinesToRunner<CR>
-map <Leader>z :VtrFocusRunner()<CR>
-map <Leader>or :VtrOpenRunner()<CR>
-map <leader>pry :VtrOpenRunner {'orientation': 'h', 'percentage': 50, 'cmd': `rails c`}<cr>
+" vim-indent-guides - <leader> ig
 
-" Automatically rebalance windows on vim resize
-autocmd VimResized * :wincmd =
+" vim-multiple-cursors - <C-n>
+" sublime-like edit multiple lines
 
-" Zoom a vim pane, <C-w>= to re-balance
-nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
-nnoremap <leader>= :wincmd =<cr>
+" vim-test - <leader> n, <leader> r, <leader> l
+  map <Leader>n :TestNearest<CR>
+  map <Leader>r :TestFile<CR>
+  map <Leader>l :TestLast<CR>
+  let test#strategy = "vimux"
+  let test#project_root = "~/Documents/dicksonone"
+  let test#enabled_runners = ["ruby#rspec"]
+
+" Vimux - <leader> c, <leader> z, <leader> x
+" Vimux opens a small tmux pane and runs a command. Above, it's set to work
+" with vim-test for specs.
+  nnoremap <leader>c :call VimuxPromptCommand()<CR>
+  nnoremap <leader>z :call VimuxZoomRunner()<CR>
+  nnoremap <leader>x :call VimuxCloseRunner()<CR>
+  let g:VimuxUseNearest = 0
+  let VimuxUseNearest = 0
+
+
+" " Passive
+"|------------------------------------------------------------------------|
+
+" YouCompleteMe - tab
+
+" lightline
+  let g:lightline = {
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ],
+        \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+        \ },
+        \ 'component_function': {
+        \   'gitbranch': 'fugitive#head',
+        \   'filename': 'LightlineFilename',
+        \ },
+        \ }
+  function! LightlineFilename()
+    let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+    let modified = &modified ? ' +' : ''
+    return filename . modified
+  endfunction
+
+" nerdtree-git
+
+" vim-endwise
+
+" vim-gitgutter
+
+" vim-lastplace
+
+" vim-rails
+
+" vim-test
+
+" vimux
+
+" yankstack
+
