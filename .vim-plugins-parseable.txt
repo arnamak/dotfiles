@@ -1,0 +1,15 @@
+/tpope/vim-eunuch
+/mcchrish/nnn.vim
+/junegunn/fzf.vim
+/neoclide/coc.nvim
+/tpope/vim-surround
+/ctrlpvim/ctrlp.vim
+/tpope/vim-commentary
+/arnamak/lightline.vim
+/airblade/vim-gitgutter
+/pangloss/vim-javascript
+/farmergreg/vim-lastplace
+/MaxMEllon/vim-jsx-pretty
+/leafgarland/typescript-vim
+/peitalin/vim-jsx-typescript
+/arnamak/challenger-deep-theme
