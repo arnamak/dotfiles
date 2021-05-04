@@ -38,7 +38,7 @@ execute pathogen#infect()
 
 " Vanilla configurations
   syntax on
-  colorscheme elementary
+  " colorscheme elementary
   set t_Co=256
   set undofile " persist undo history after closing vim
   set undodir=~/.config/nvim/.undo
