@@ -86,3 +86,7 @@ export HISTSIZE=100000
 export SAVEHIST=100000
 export HISTFILE="$HOME/.zsh_history"
 export PER_DIRECTORY_HISTORY_TOGGLE=^=
+
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec startx -- vt1 &> /dev/null
+fi
