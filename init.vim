@@ -1,183 +1,209 @@
 execute pathogen#infect()
-
 """ Quick Reference/Table of Contents
 """
 "" User
-"--------------------------------
+"----------------------------------
+" CoC - <leader> c
 " ctrlp - <leader> t
 " vim-eunuch - :<Cmd>
-" vim-fzf - <leader> r
-" nerdtree - <leader> e
-" vim-tbone - <leader> y/p
-" vim-rhubarb - <leader> G
-" vim-yankstack - <leader> p/P *
+" vim-fzf-rg - <leader> g
 " vim-commentary - <select_text> gc
-" vim-fugitive - <leader> gco/gad/gcm/q
 "
-" " Passive
-" -------------------------------
+"" Passive
+"----------------------------------
 "" Colors, syntax, linting
-" black
-" vim-js
-" vim-haml
-" asyncrun
 " lightline
-" elementary
-" vim-flake8
-" vim-endwise
-" vim-gitgutter
 " vim-lastplace
-" vim-javascript
-"" Configuration
+" vim-gitgutter
 " vim-jsx-pretty
-"
-"" absent, but may want to add back later
-" vim-rails
-" vim-test
-" vimux
+" vim-javascript
+" challenger_deep
+" comfortable-motion
 
-" Vanilla configurations
+" Vanilla
+"----------------------------------
+"" Colors
   syntax on
-  " colorscheme elementary
   set t_Co=256
-  set undofile " persist undo history after closing vim
+  colorscheme challenger_deep
+"" Undo
+  set undofile
   set undodir=~/.config/nvim/.undo
+"" Spacing
+  set smarttab
+  set expandtab
   set tabstop=2
   set shiftwidth=2
   set softtabstop=2
-  set smarttab
-  set expandtab
+"" Appearance
+  set hidden
   set number
   set nowrap
-  set backspace=indent,eol,start " more intuitive navigation when hitting backspace
-  set laststatus=2
   set noshowmode
+  set laststatus=2
+"" Navigation
+  set ttyfast
+  set mouse=a
+  set sidescroll=1
   set scrolloff=300
   set sidescrolloff=1
-  set sidescroll=1
-  set ttyfast
-  noremap <Up> <NOP>
-  noremap <Down> <NOP>
-  noremap <Left> <NOP>
-  noremap <Right> <NOP
+  nmap <LeftMouse> <nop>
+  imap <LeftMouse> <nop>
+  vmap <LeftMouse> <nop>
+  nmap <2-LeftMouse> <nop>
+"" Convenience
+  set noswapfile
+  set clipboard+=unnamedplus
   autocmd VimResized * :wincmd =
-  let g:python3_host_prog = '$HOME/.pyenv/versions/3.7.6/bin/python'
+"" Folds
+  let javaScript_fold=1
+  set foldmethod=syntax
+  set foldlevelstart=99
+"" CoC
+  set nobackup
+  set shortmess+=c
+  set nowritebackup
+  set updatetime=1000
 
-" mappings
-" typing 'jj' while in insert mode saves your file and enters normal mode
-  imap <silent> jj <Esc>:update<Enter>
+"----------------------------------
+" /Vanilla Config
+
+"" Mappings
+  noremap :W :w
   let mapleader=" "
+  imap <silent> kk <Esc>
+  imap <silent> jj <Esc>:update<Enter>
 
-" whitespace
-  :highlight ExtraWhitespace ctermbg=darkblue guibg=darkblue
-  :match ExtraWhitespace /\s\+$/
+"" Whitespace
+  highlight ExtraWhitespace ctermbg=darkblue guibg=darkblue
   map <leader>T  :%s/\s\s*$//g<cr>
+  match ExtraWhitespace /\s\+$/
 
-" " User
-"|------------------------------------------------------------------------------|
-
-" linter
-  let b:ale_fixers = {'javascript': ['prettier', 'eslint'], 'python': ['flake8', 'black']}
+"" User
+"-------------------------------------------------------
+" Linter
   let g:vim_jsx_pretty_colorful_config = 1
 
-" ctrlp - <leader> t
+" CTRLP
   let g:ctrlp_map = '<leader>t'
+  map <leader>v :CtrlPMRU<cr>
   map <leader>b :CtrlPBuffer<cr>
-  map <leader>r :CtrlPMRU<cr>
-  set runtimepath^=~/.config/nvim/bundle/ctrlp.vim/autoload/ctrlp.vim
   let g:ctrlp_working_path_mode = 2
-  let g:ctrlp_custom_ignore = '_site\|node_modules\|\.git$\|\.svn$|\.swp$|\.o$|'
   set wildignore+=*.o,*.obj,.git,*.swp,tmp,*.jsx.html,*.pyc
-   let g:ctrlp_prompt_mappings = {
-    \ 'PrtSelectMove("k")':   ['<c-u>', '<up>'],
-    \ }
-
-" nerdtree - <leader> e - I don't really use it, but I guess it could be
-" helpful
-  map <leader>e :NERDTreeToggle<CR>
-  let NERDTreeHijackNetrw=1
+  set runtimepath^=~/.config/nvim/bundle/ctrlp.vim/autoload/ctrlp.vim/plugin/
+  let g:ctrlp_prompt_mappings = { 'PrtSelectMove("k")':   ['<c-u>', '<up>'] }
+  let g:ctrlp_custom_ignore = '_site\|node_modules\|\.git$\|\.svn$|\.swp$|\.o$|'
 
 " vim-commentary - <select_text> gc
 
-" vim-fugitive - <leader> i
-  map <leader>i :Gstatus<CR>
-  map <leader>q :Gblame<CR>
-  map <leader>gad :G add .<CR>
-  map <leader>gco :G checkout -b"
-  map <leader>gcm :G commit -m"
-  map <leader>G :Gbrowse<CR>
-
-" vim-indent-guides - <leader> ig
-
-" vim-tbone
-  map <leader>p :Tput<CR>
-  map <leader>y :Tyank<CR>
-
-" vim-test - <leader> n, <leader> r, <leader> l
-  " map <Leader>n :TestNearest<CR>
-  " map <Leader>r :TestFile<CR>
-  " map <Leader>l :TestLast<CR>
-  " let test#strategy = \"vimux"
-  " let test#project_root = \""
-  " let test#enabled_runners = ["ruby#rspec"]
-
-" Vimux - <leader> c, <leader> z, <leader> x
-" Vimux opens a small tmux pane and runs a command. Above, it's set to work
-" with vim-test for specs.
-  " nnoremap <leader>c :call VimuxPromptCommand()<CR>
-  " nnoremap <leader>z :call VimuxZoomRunner()<CR>
-  " nnoremap <leader>x :call VimuxCloseRunner()<CR>
-  " let g:VimuxUseNearest = 0
-  " let VimuxUseNearest = 0
-
-
-" " Passive
-"|------------------------------------------------------------------------|
-
-" lightline
+" Passive
+"------------------------------------------------
+"" Lightline
   let g:lightline = {
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+        \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'cocstatus', 'currentfunction' ] ]
         \ },
         \ 'component_function': {
         \   'gitbranch': 'fugitive#head',
         \   'filename': 'LightlineFilename',
+        \   'cocstatus': 'CocCurrentFunction',
         \ },
         \ }
+  function! CocCurrentFunction()
+      return get(b:, 'coc_current_function', '')
+  endfunction
   function! LightlineFilename()
-    let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
-    let modified = &modified ? ' +' : ''
-    return filename . modified
+    let root = fnamemodify(get(b:, 'git_dir'), ':h')
+    let path = expand('%:p')
+    if path[:len(root)-1] ==# root
+      return path[len(root)+1:]
+    endif
+    return expand('%')
   endfunction
 
 autocmd FileType python map <buffer> <F2> :call flake8#Flake8()<CR>
 
+
 " vim.fzf
-" Helpful Commands
-" :Commits
-" :Rg
 set rtp+=~/.fzf
+map <leader>g :Rg<CR>
 let g:fzf_preview_window = 'right:60%'
-map <leader>r :Rg<CR>
 
-"" vim-eunuch
-" helpful commands:
-" :SudoWrite
-" :Move
-" :Delete
-" :Mkdir
-" vim-endwise
+"" Smooth Scrolling
+let g:comfortable_motion_air_drag = 2.0
+let g:comfortable_motion_friction = 200.0
+let g:comfortable_motion_no_default_key_mappings = 1
+nnoremap <silent> <C-e> :call comfortable_motion#flick(80)<CR>
+nnoremap <silent> <C-y> :call comfortable_motion#flick(-80)<CR>
+nnoremap <silent> <C-d> :call comfortable_motion#flick(150)<CR>
+nnoremap <silent> <C-u> :call comfortable_motion#flick(-150)<CR>
+noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
+noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
 
-" vim-gitgutter
+"" CoC
+let g:coc_global_extensions = [
+  \ 'coc-json',
+  \ 'coc-jest',
+  \ 'coc-pairs',
+  \ 'coc-eslint',
+  \ 'coc-tsserver',
+  \ 'coc-snippets',
+  \ 'coc-prettier',
+  \ ]
 
-" vim-lastplace
+" Autocomplete
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+let g:coc_snippet_next = '<tab>'
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-" vim-rails
 
-" vim-test
+" Documentation
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" vimux
 
-" yankstack
+" Formatting
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+" CodeAction
+nmap <leader>rn <Plug>(coc-rename)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gd <Plug>(coc-definition)
+xmap <leader>x <Plug>(coc-convert-snippet)
+vmap <leader>a  <Plug>(coc-codeaction-selected)
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+autocmd CursorHold * silent call CocActionAsync('highlight')
+nnoremap <leader>te :call CocAction('runCommand', 'jest.singleTest')<CR>
+nnoremap <leader>rt :call CocAction('runCommand', 'jest.projectTest')<CR>
+nnoremap <leader>ft :call CocAction('runCommand', 'jest.fileTest', ['%'])<CR>
