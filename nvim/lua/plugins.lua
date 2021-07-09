@@ -7,6 +7,7 @@ return packer.startup(
     use "neovim/nvim-lspconfig"
     use 'navarasu/onedark.nvim'
     use 'kyazdani42/nvim-web-devicons'
+    use 'ctrlpvim/ctrlp.vim'
     use {
       'nvim-treesitter/nvim-treesitter',
       config = function()

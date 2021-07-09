@@ -8,4 +8,5 @@ end
 
 local opt = {}
 
-map("n", "<leader>n", [[ <Cmd> set nu!<CR>]], opt)
+map("n", "<Leader>n", [[ <Cmd> set nu!<CR>]], opt)
+map("n", "<Leader>v", [[:CtrlPMRU <CR>]], opt)

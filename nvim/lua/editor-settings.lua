@@ -10,7 +10,7 @@ opt.laststatus = 2 -- Always display the status line
 opt.sidescroll = 1 -- Defines the min amount of columns the screen will move on a horizontal scroll
 opt.scrolloff = 300 -- Defines how far "off" you can scroll
 opt.undofile = true -- Store undo history
-opt.smarttab = true -- When on, adheres to shiftwidth when at the start of the line
+opt.smarttab = false -- When on, adheres to shiftwidth when at the start of the line
 opt.smartcase = true -- Ignore case when the pattern is lowercase, don't ignore uppercase
 opt.updatetime = 251 -- Update interval for gitsigns
 opt.splitbelow = true -- Allow a tab to be opened in a horizontal split
@@ -29,16 +29,15 @@ win.number = true -- Display line numbers
 win.numberwidth = 2 -- Width of the number column
 win.cursorline = true -- Highlight the screen line of the cursor
 win.signcolumn = "yes" -- Always show the sign column
-win.foldmethod = "expr"
-win.foldexpr = "nvim_treesitter#foldexpr()"
+win.foldmethod = "syntax"
 
 -- Buffer
-buf.tabstop = 2 -- Within a buffer, the space given to a tab
-buf.shiftwidth = 2 -- How many columns a > will move
-buf.softtabstop = 2 -- Whatever a "soft" tab is, this is how many spaces it is.
+opt.tabstop = 2 -- Within a buffer, the space given to a tab
+opt.shiftwidth = 2 -- How many columns a > will move
+opt.softtabstop = 2 -- Whatever a "soft" tab is, this is how many spaces it is.
 buf.swapfile = false -- Disable swap files
-buf.expandtab = true -- Use spaces for tabs in insert mode
-buf.smartindent = true -- Autoindenting when starting a new line (should this be turned off? Re: LSP)
+opt.expandtab = true -- Use spaces for tabs in insert mode
+opt.smartindent = true -- Autoindenting when starting a new line (should this be turned off? Re: LSP)
 
 vim.g.loaded_tar = 1 -- Disable vim tar plugin
 vim.g.loaded_spec = 1 -- Disable weird buffer options
@@ -49,6 +48,10 @@ vim.g.loadedTarPlugin = 1 -- Disable vim tar plugin
 vim.g.loaded_zipPlugin = 1 -- Disable vim zip plugin
 vim.g.loaded_matchparen = 1 -- Disable matching parens (will probably be handled by a plugin)
 vim.g.loaded_netrwPlugin = 1 -- Disable network editing (may want to re-enable)
+vim.g.ctrlp_map = "<leader>t" -- Launch CtrlP
+vim.g.ctrlp_working_path_mode = 2 -- Set how deep CtrlP searches
+vim.g.ctrlp_prompt_mappings = [[ { 'PrtSelectMove("k")':   ['<c-u>', '<up>'] } ]]
+vim.g.ctrlp_custom_ignore = [['_site\|node_modules\|\.git$\|\.svn$|\.swp$|\.o$|']]
 vim.g.loaded_2html_plugin = 1 -- Disable conversion of the entire vim file to html?
 
 local M = {}

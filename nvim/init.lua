@@ -1,12 +1,12 @@
-require("plugins")
-require("mappings")
 require("editor-settings")
+require("plugins")
 
 local g = vim.g
 g.mapleader = " "
 g.filetype = "plugin indent on"
 g.onedark_style = "deep"
 require("onedark").setup()
+require("mappings")
 
 
 local sumneko_root_path = '/home/arnamak/.current/lua-language-server/'

@@ -24,7 +24,7 @@ M.config = function()
     },
     indent = {
       enable = true
-    }
+    },
   }
 end
 
