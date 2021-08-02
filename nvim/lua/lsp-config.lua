@@ -1,5 +1,4 @@
 local nvim_lsp = require("lspconfig")
-
 require("lspkind").init({
   with_text = true,
   preset = "codicons",
@@ -31,6 +30,7 @@ require("lspkind").init({
   }
 })
 
+-- Typescript--
 local format_async = function(err, _, result, _, bufnr)
   if err ~= nil or result == nil then return end
   if not vim.api.nvim_buf_get_option(bufnr, "modified") then
@@ -54,8 +54,7 @@ _G.lsp_organize_imports = function()
   vim.lsp.buf.execute_command(params)
 end
 
-local on_attach = function(client, bufnr)
-  local buf_map = vim.api.nvim_buf_set_keymap
+local on_attach = function(client)
   vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
   vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
   vim.cmd("command! LspCodeAction lua vim.lsp.buf.code_action()")
@@ -69,19 +68,10 @@ local on_attach = function(client, bufnr)
   vim.cmd("command! LspDiagNext lua vim.lsp.diagnostic.goto_next()")
   vim.cmd("command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
   vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
-  buf_map(bufnr, "n", "gd", ":LspDef<CR>", { silent = true })
-  buf_map(bufnr, "n", "gr", ":LspRename<CR>", { silent = true })
-  buf_map(bufnr, "n", "gR", ":LspRefs<CR>", { silent = true })
-  buf_map(bufnr, "n", "gy", ":LspTypeDef<CR>", { silent = true })
-  buf_map(bufnr, "n", "K", ":LspHover<CR>", { silent = true })
-  buf_map(bufnr, "n", "gs", ":LspOrganize<CR>", { silent = true })
-  buf_map(bufnr, "n", "[a", ":LspDiagPrev<CR>", { silent = true })
-  buf_map(bufnr, "n", "]a", ":LspDiagNext<CR>", { silent = true })
-  buf_map(bufnr, "n", "ga", ":LspCodeAction<CR>", { silent = true })
-  buf_map(bufnr, "n", "<Leader>a", ":LspDiagLine<CR>", { silent = true })
-  buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>",
-          { silent = true })
-
+  require"lsp_signature".on_attach({
+    bind = true,
+    handler_opts = { border = "single" }
+  })
   if client.resolved_capabilities.document_formatting then
     vim.api.nvim_exec([[
       augroup LspAutocommands
@@ -139,8 +129,11 @@ nvim_lsp.diagnosticls.setup {
     formatFiletypes = formatFiletypes
   }
 }
+-- Typescript--
 
-local sumneko_root_path = "/home/arnamak/.current/lua-language-server"
+-- Lua--
+local luals_bin = "/home/arnamak/.current/lua-language-server/"
+local sumneko_root_path = luals_bin
 local sumneko_binary =
   "/home/arnamak/.current/lua-language-server/bin/Linux/lua-language-server"
 local runtime_path = vim.split(package.path, ";")
@@ -173,9 +166,9 @@ nvim_lsp.efm.setup {
     }
   }
 }
+-- Lua--
 
-nvim_lsp.bashls.setup {}
-
+-- CSS--
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 nvim_lsp.cssls.setup {
@@ -188,4 +181,16 @@ nvim_lsp.cssls.setup {
     tscss = { validate = false }
   }
 }
+-- CSS--
+
+-- Docker--
+vim.api.nvim_exec([[
+    au BufRead Dockerfile.* set filetype=dockerfile
+    au BufRead *.jss.ts set filetype=tscss | set syntax=typescript
+  ]], false)
 nvim_lsp.dockerls.setup { filetypes = { "dockerfile" } }
+-- Docker--
+
+-- Bash--
+nvim_lsp.bashls.setup {}
+-- Bash--

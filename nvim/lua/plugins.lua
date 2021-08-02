@@ -3,16 +3,15 @@ local use = packer.use
 
 return packer.startup(function()
   use "wbthomason/packer.nvim"
+  use "nvim-lua/popup.nvim"
   use "neovim/nvim-lspconfig"
   use "navarasu/onedark.nvim"
   use "kyazdani42/nvim-tree.lua"
   use "hrsh7th/nvim-compe"
   use "ctrlpvim/ctrlp.vim"
+  use "matbme/JABS.nvim"
   use "nvim-treesitter/playground"
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    config = function() require("treesitter-nvim").config() end
-  }
+  use { "nvim-treesitter/nvim-treesitter", config = function() require("treesitter-nvim").config() end }
   use "windwp/nvim-autopairs"
   use "windwp/nvim-ts-autotag"
   use {
@@ -28,9 +27,7 @@ return packer.startup(function()
     branch = "lua",
     event = "BufRead",
     setup = function() require("editor-settings").blankline() end,
-    display = {
-      border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
-    }
+    display = { border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" } }
   }
   use "nvim-lua/plenary.nvim"
   use "JoosepAlviste/nvim-ts-context-commentstring"
@@ -51,4 +48,8 @@ return packer.startup(function()
   }
   use "onsails/lspkind-nvim"
   use "glepnir/lspsaga.nvim"
+  use { "pwntester/octo.nvim", config = function() require"octo".setup() end }
+  use { "nvim-telescope/telescope.nvim", requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } } }
+  use { "ray-x/lsp_signature.nvim" }
+  use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 end)
