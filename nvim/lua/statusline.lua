@@ -2,36 +2,31 @@ local gl = require("galaxyline")
 local gls = gl.section
 local icons = require("nvim-nonicons")
 local condition = require("galaxyline.condition")
-local colors = {
-  gray = "#4b5263",
-  red = "#FF0000",
-  yellow = "#FFCC00",
-  green = "#00FF00",
-}
+local colors = { gray = "#4b5263", red = "#FF0000", yellow = "#FFCC00", green = "#00FF00" }
 
-gl.short_line_list = {'NvimTree'}
+gl.short_line_list = { "NvimTree" }
 
 local checkwidth = function()
-    local squeeze_width = vim.fn.winwidth(0) / 2
-    if squeeze_width > 30 then
-        return true
-    end
-    return false
+  local squeeze_width = vim.fn.winwidth(0) / 2
+  if squeeze_width > 30 then
+    return true
+  end
+  return false
 end
 
 gls.left[1] = {
   ViMode = {
     provider = function()
       local mode = {
-        n = {color = "String", icon = icons.get("vim-normal-mode")},
-        i = {color = "Function", icon = icons.get("vim-insert-mode")},
-        v = {color = "Conditional", icon = icons.get("vim-visual-mode")},
-        V = {color = "Conditional", icon = icons.get("vim-visual-mode")},
-        [""] = {color = "Conditional", icon = icons.get("vim-visual-mode")},
-        c = {color = "Keyword", icon = icons.get("vim-command-mode")},
-        ['!'] = {color = "Keyword", icon = icons.get("vim-command-mode")},
-        R = {color = "Keyword", icon = icons.get("vim-replace-mode")},
-        r = {color = "Keyword", icon = icons.get("vim-replace-mode")},
+        n = { color = "String", icon = icons.get("vim-normal-mode") },
+        i = { color = "Function", icon = icons.get("vim-insert-mode") },
+        v = { color = "Conditional", icon = icons.get("vim-visual-mode") },
+        V = { color = "Conditional", icon = icons.get("vim-visual-mode") },
+        [""] = { color = "Conditional", icon = icons.get("vim-visual-mode") },
+        c = { color = "Keyword", icon = icons.get("vim-command-mode") },
+        ["!"] = { color = "Keyword", icon = icons.get("vim-command-mode") },
+        R = { color = "Keyword", icon = icons.get("vim-replace-mode") },
+        r = { color = "Keyword", icon = icons.get("vim-replace-mode") },
       }
       vim.api.nvim_command("hi link GalaxyViMode " .. mode[vim.fn.mode()].color)
       if mode[vim.fn.mode()].icon ~= nil then
@@ -39,8 +34,8 @@ gls.left[1] = {
       end
     end,
     separator = "  ",
-    condition = condition.hide_in_width
-  }
+    condition = condition.hide_in_width,
+  },
 }
 gls.left[2] = {
   FileName = {
@@ -58,54 +53,45 @@ gls.left[2] = {
       end
       return fname
     end,
-    condition = condition.hide_in_width or condition.buffer_not_empty
-  }
+    condition = condition.hide_in_width or condition.buffer_not_empty,
+  },
 }
 gls.left[4] = {
-    DiagnosticError = {
-        provider = "DiagnosticError",
-        icon = " ".. icons.get("x-circle") .. " ",
-        highlight = {colors.red},
-    }
+  DiagnosticError = {
+    provider = "DiagnosticError",
+    icon = " " .. icons.get("x-circle") .. " ",
+    highlight = { colors.red },
+  },
 }
-gls.left[5] = {
-    DiagnosticWarn = {
-        provider = "DiagnosticWarn",
-        icon = "  ",
-        highlight = {colors.yellow}
-    }
-}
+gls.left[5] = { DiagnosticWarn = { provider = "DiagnosticWarn", icon = "  ", highlight = { colors.yellow } } }
 gls.right[1] = {
-lsp_status = {
-  provider = function()
-    local clients = vim.lsp.get_active_clients()
+  lsp_status = {
+    provider = function()
+      local clients = vim.lsp.get_active_clients()
       if next(clients) ~= nil then
         return " " .. "  " .. " LSP "
       else
         return ""
       end
     end,
-  }
+  },
 }
 gls.right[2] = {
-  FileIcon = {
-    provider = "FileIcon",
-    condition = condition.hide_in_width or condition.buffer_not_empty,
-    separator = " ",
-  }
+  FileIcon = { provider = "FileIcon", condition = condition.hide_in_width or condition.buffer_not_empty,
+               separator = " " },
 }
 gls.right[3] = {
   FileTypeName = {
     provider = function()
       local ft = vim.bo.filetype
-      if (ft) == 'typescriptreact' then
-        return 'tsx'
+      if (ft) == "typescriptreact" then
+        return "tsx"
       else
         return vim.bo.filetype
       end
     end,
     condition = condition.hide_in_width or condition.buffer_not_empty,
-  }
+  },
 }
 gls.right[4] = {
   GitBranch = {
@@ -113,14 +99,14 @@ gls.right[4] = {
     icon = icons.get("git-branch") .. " ",
     separator = "  ",
     condition = require("galaxyline.condition").check_git_workspace and condition.hide_in_width,
-  }
+  },
 }
 gls.right[5] = {
   EndGap = {
     provider = function()
-      return ''
+      return ""
     end,
     condition = condition.hide_in_width,
-    separator = ' ',
-  }
+    separator = " ",
+  },
 }

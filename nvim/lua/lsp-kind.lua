@@ -1,0 +1,32 @@
+require("lspkind").init(
+  {
+    with_text = true,
+    preset = "codicons",
+    symbol_map = {
+      Text = "",
+      Method = "",
+      Function = "",
+      Field = "ﰠ",
+      Constructor = "",
+      Variable = "",
+      Class = "ﴯ",
+      Interface = "",
+      Module = "",
+      Property = "ﰠ",
+      Unit = "塞",
+      Value = "",
+      Enum = "",
+      Keyword = "",
+      Snippet = "",
+      Color = "",
+      File = "",
+      Folder = "",
+      EnumMember = "",
+      Constant = "",
+      Struct = "פּ",
+      Operator = "",
+      Reference = "",
+      Event = "",
+    },
+  }
+)
