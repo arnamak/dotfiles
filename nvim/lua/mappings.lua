@@ -1,22 +1,28 @@
 local map = require("util.map")
 local toc = require("table-of-contents.mappings-toc")
-
+vim.api.nvim_exec(
+  [[augroup KeepCentered
+    autocmd!
+    autocmd CursorMoved * normal! zz
+  augroup END]], true
+)
 -- Native--
 ---- Yank until EOL
 map("n", "Y", [[y$]])
 ---- Keep view at center of screen, start of line
-map("n", "j", [[jzz0]])
-map("n", "G", [[Gzz0]])
-map("n", "k", [[kzz0]])
-map("n", "n", [[nzzzv]])
+map("n", ")", [[j0]])
+map("n", "(", [[k0]])
+map("n", "o", [[<CMD>set scrolloff=999<CR>o]])
+map("n", "i", [[<CMD>set scrolloff=999<CR>i]])
+map("i", "<Esc>", [[<CMD>set scrolloff=0<CR><Esc>]])
 ---- Undo breakpoints
 map("i", ",", [[,<c-g>u]])
 map("i", ".", [[.<c-g>u]])
 map("i", "!", [[!<c-g>u]])
 map("i", "?", [[?<c-g>u]])
 ---- Move selection up/down
-map("v", "J", [[:m '>+1<CR>gv=gv zz0]])
-map("v", "K", [[:m '<-2<CR>gv=gv zz0]])
+map("v", "J", [[:m '>+1<CR>gv=gv]])
+map("v", "K", [[:m '<-2<CR>gv=gv]])
 ---- Misc
 map("i", toc.native.insert_save_and_quit, [[<Esc>:w<CR>]])
 -- Native--
