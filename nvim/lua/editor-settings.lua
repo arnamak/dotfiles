@@ -1,6 +1,8 @@
 local opt = vim.o
-local buf = vim.bo
 local win = vim.wo
+vim.g.mapleader = " "
+vim.g.filetype = "plugin indent on"
+vim.g.onedark_style = "deep"
 
 -- Global
 opt.mouse = "a" -- Allow mouse in all modes (other values: "n", "v", "i", etc)
@@ -19,10 +21,10 @@ opt.sidescrolloff = 1 -- Defines the min amount of columns around the cursor
 opt.startofline = false -- Uncertain what this actually does. My observation, inserting not-SOL puts you SOL. Investigate normal mode.
 opt.guifont = "nonicons" -- Icon font. Might be unnecessary
 opt.termguicolors = true -- Allow 24-bit RGB color
-opt.maxmempattern = 10000 -- Maximum amount of memory (KB) used for pattern matching
+opt.maxmempattern = 1000000 -- Maximum amount of memory (KB) used for pattern matching
 opt.clipboard = "unnamedplus" -- Access xclip (system) clipboard (requires xclip)
 opt.backspace = "indent,eol,start" -- More intuitive backspace behavior in insert mode
-opt.undodir = "/home/arnamak/.config/nvim/.undo" -- Directory where undo history is stored
+opt.undodir = "/home/arnamak/.local/share/nvim/undo" -- Directory where undo history is stored
 
 -- Window
 win.wrap = false -- Disable word wrap

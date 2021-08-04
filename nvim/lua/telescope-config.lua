@@ -43,7 +43,7 @@ require("telescope").setup {
     },
     oldfiles = {
       border = false,
-      sort_lastused = true,
+      sort_mru = true,
       initial_mode = "insert",
       path_display = { "tail" },
       layout_strategy = "bottom_pane",

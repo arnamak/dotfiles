@@ -17,6 +17,7 @@ return packer.startup(
     use "wbthomason/packer.nvim"
     use "ray-x/lsp_signature.nvim"
     use "kyazdani42/nvim-tree.lua"
+    use "ethanholz/nvim-lastplace"
     use "nvim-treesitter/playground"
     use "kyazdani42/nvim-web-devicons"
     use "JoosepAlviste/nvim-ts-context-commentstring"

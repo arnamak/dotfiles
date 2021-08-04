@@ -1,4 +1,5 @@
 local nvim_lsp = require("lspconfig")
+require("lspsaga").init_lsp_saga()
 local util = require("lspconfig").util
 require("lsp-kind")
 
