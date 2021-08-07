@@ -3,13 +3,16 @@ local win = vim.wo
 vim.g.mapleader = " "
 vim.g.filetype = "plugin indent on"
 vim.g.onedark_style = "deep"
+vim.g.shada = "'50, <1000,%,h"
 
 -- Global
 opt.mouse = "a" -- Allow mouse in all modes (other values: "n", "v", "i", etc)
 opt.ruler = false -- Displays cursor line number and position (3,67) in the statusline
 opt.cmdheight = 1 -- Number of screen lines to use for the command-line
 opt.laststatus = 2 -- Always display the status line
+opt.showmode = false -- 'false' disables showing which mode vim is in below the statusline
 opt.sidescroll = 1 -- Defines the min amount of columns the screen will move on a horizontal scroll
+opt.shortmess = "acIAF" -- Shortens or disables messaging in the command line
 opt.scrolloff = 0 -- Defines how far "off" you can scroll
 opt.undofile = true -- Store undo history
 opt.smarttab = false -- When on, adheres to shiftwidth when at the start of the line
@@ -19,7 +22,6 @@ opt.splitbelow = true -- Allow a tab to be opened in a horizontal split
 opt.splitright = true -- Allow a tab to be opened in a vertical split
 opt.sidescrolloff = 1 -- Defines the min amount of columns around the cursor
 opt.startofline = false -- Uncertain what this actually does. My observation, inserting not-SOL puts you SOL. Investigate normal mode.
-opt.guifont = "nonicons" -- Icon font. Might be unnecessary
 opt.termguicolors = true -- Allow 24-bit RGB color
 opt.maxmempattern = 1000000 -- Maximum amount of memory (KB) used for pattern matching
 opt.clipboard = "unnamedplus" -- Access xclip (system) clipboard (requires xclip)

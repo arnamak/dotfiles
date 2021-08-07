@@ -1,6 +1,19 @@
 local nvim_lsp = require("lspconfig")
 require("lspsaga").init_lsp_saga()
 local util = require("lspconfig").util
+local lsp_status = require("lsp-status")
+lsp_status.config(
+  {
+    kind_labels = {},
+    indicator_errors = "",
+    indicator_warnings = "",
+    status_symbol = "",
+    indicator_hint = "❗",
+    indicator_info = "🛈",
+    indicator_ok = "",
+  }
+)
+lsp_status.register_progress()
 require("lsp-kind")
 
 -- Typescript--
@@ -44,7 +57,7 @@ local on_attach = function(client)
   vim.cmd("command! LspDiagNext lua vim.lsp.diagnostic.goto_next()")
   vim.cmd("command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
   vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
-  require"lsp_signature".on_attach({ bind = true, handler_opts = { border = "single" } })
+  client.capabilities = vim.tbl_extend("keep", client.capabilities or {}, lsp_status.capabilities)
   if client.resolved_capabilities.document_formatting then
     vim.api.nvim_exec(
       [[
@@ -60,6 +73,7 @@ nvim_lsp.tsserver.setup {
   root_dir = util.root_pattern("package.json"),
   on_attach = function(client)
     client.resolved_capabilities.document_formatting = false
+    lsp_status.on_attach(client)
     on_attach(client)
   end,
 }

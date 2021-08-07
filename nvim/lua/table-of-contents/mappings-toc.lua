@@ -5,17 +5,11 @@ M.files = {
   buffer = "<Leader>b",
   browse = "<Leader>n",
 }
-M.hop = {
-  normal = "~",
-  hint_1 = "<C-Space>",
-  hint_2 = "<Leader>f",
-}
 M.compe = {
   confirms = "<CR>",
   quit_all = "<C-e>",
   complete = "<Tab>",
   backward = "<S-Tab>",
-  alt_conf = "<C-Space>",
 }
 M.telescope = {
   mru_file = "tt",
@@ -45,8 +39,9 @@ M.jump = {
 }
 M.native = {
   insert_save_and_quit = "jj",
+  insert_move_cursor_l = "<C-s>",
+  insert_move_cursor_r = "<C-f>",
 }
-
 M.octo_files = {
   next = "j",
   prev = "k",

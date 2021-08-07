@@ -5,6 +5,8 @@ return packer.startup(
   function()
     use "matbme/JABS.nvim"
     use "hrsh7th/nvim-compe"
+    use "b3nj5m1n/kommentary"
+    use "windwp/nvim-spectre"
     use "nvim-lua/popup.nvim"
     use "p00f/nvim-ts-rainbow"
     use "onsails/lspkind-nvim"
@@ -15,10 +17,11 @@ return packer.startup(
     use "navarasu/onedark.nvim"
     use "windwp/nvim-ts-autotag"
     use "wbthomason/packer.nvim"
-    use "ray-x/lsp_signature.nvim"
+    use "ggandor/lightspeed.nvim"
     use "kyazdani42/nvim-tree.lua"
     use "ethanholz/nvim-lastplace"
     use "nvim-treesitter/playground"
+    use "arnamak/stay-centered.nvim"
     use "kyazdani42/nvim-web-devicons"
     use "JoosepAlviste/nvim-ts-context-commentstring"
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
@@ -31,16 +34,7 @@ return packer.startup(
       end,
     }
     use {
-      "phaazon/hop.nvim",
-      as = "hop",
-      config = function()
-        require"hop".setup { keys = "etovxqpdygfblzhckisuran" }
-      end,
-    }
-    use {
       "lukas-reineke/indent-blankline.nvim",
-      branch = "lua",
-      event = "BufRead",
       setup = function()
         require("editor-settings").blankline()
       end,
@@ -53,18 +47,14 @@ return packer.startup(
       end,
       requires = { "arnamak/nvim-nonicons" },
     }
-    use {
-      "lewis6991/gitsigns.nvim",
-      requires = { "nvim-lua/plenary.nvim" },
-      config = function()
-        require("gitsigns").setup()
-      end,
-    }
+    use { "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } }
     use {
       "pwntester/octo.nvim",
       config = function()
         require"octo".setup()
       end,
     }
+    use "gennaro-tedesco/nvim-peekup"
+    use "nvim-lua/lsp-status.nvim"
   end
 )

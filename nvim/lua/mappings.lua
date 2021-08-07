@@ -4,10 +4,10 @@ local toc = require("table-of-contents.mappings-toc")
 -- Scroll at start of line
 map("n", "5", [[j0]])
 map("n", "6", [[k0]])
--- map("n", "o", [[zzo]])
--- map("i", "<BS>", [[<BS><C-o>zz]])
--- map("i", "<CR>", [[<C-\><C-o><C-e><CR>]])
--- map("i", "<Esc>", [[<CMD>set scrolloff=0<CR><Esc>]])
+map("n", "H", [[zh]])
+map("n", "L", [[zl]])
+map("v", "H", [[zh]])
+map("v", "L", [[zl]])
 ---- Undo breakpoints (`u` will undo until one of these chars and stop until pressed again)
 map("i", ",", [[,<c-g>u]])
 map("i", ".", [[.<c-g>u]])
@@ -18,17 +18,13 @@ map("v", "J", [[:m '>+1<CR>gv=gv]])
 map("v", "K", [[:m '<-2<CR>gv=gv]])
 ---- Misc
 map("i", toc.native.insert_save_and_quit, [[<Esc>]])
+map("i", toc.native.insert_move_cursor_l, [[<Left>]])
+map("i", toc.native.insert_move_cursor_r, [[<Right>]])
 -- Native--
 -- Files--
 map("n", toc.files.buffer, [[:JABSOpen<CR>]])
 map("n", toc.files.browse, [[:NvimTreeToggle<CR>]])
 -- Files--
--- Hop--
-map("n", toc.hop.normal, [[:lua require'hop'.hint_char1()<CR>]])
-map("n", toc.hop.hint_1, [[:lua require'hop'.hint_words()<CR>]])
-map("n", toc.hop.hint_2, [[:lua require'hop'.hint_char2()<CR>]])
--- Hop--
-
 -- LSP--
 map("n", toc.jump.lsp_defs, [[:LspDef<CR>]])
 map("n", toc.jump.lsp_type, [[:LspTypeDef<CR>]])
@@ -55,12 +51,10 @@ map("n", toc.telescope.git_bran, [[:lua require('telescope.builtin').git_branche
 map("n", toc.telescope.lsp_refs, [[:lua require('telescope.builtin').lsp_references()<CR>]])
 -- Telescope--
 -- Completion--
-local completion_opts = { expr = true }
--- map("i", toc.compe.quit_all, [[compe#close()]], completion_opts)
+local completion_opts = { silent = true, expr = true }
 map("i", toc.compe.complete, [[v:lua.tab_complete()]], completion_opts)
 map("s", toc.compe.complete, [[v:lua.tab_complete()]], completion_opts)
 map("i", toc.compe.backward, [[v:lua.s_tab_complete()]], completion_opts)
 map("s", toc.compe.backward, [[v:lua.s_tab_complete()]], completion_opts)
 map("i", toc.compe.confirms, [[compe#confirm({ 'keys': '<CR>', 'select': v:true })]], completion_opts)
-map("i", toc.compe.alt_conf, [[compe#confirm({ 'keys': '<CR>', 'select': v:true })]], completion_opts)
 -- Completion--

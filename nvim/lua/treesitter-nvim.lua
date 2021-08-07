@@ -1,6 +1,5 @@
 local M = {}
 local npairs = require("nvim-autopairs")
-local endwise = require("nvim-autopairs.ts-rule").endwise
 
 npairs.setup(
   {
@@ -12,14 +11,6 @@ npairs.setup(
       javascriptreact = { "template_string" },
       typescriptreact = { "template_string" },
     },
-  }
-)
-npairs.add_rules(
-  {
-    endwise(
-      "arrow_function", "arguments", "body", "variable_declarator", "return_statement", "jsx_element",
-      "jsx_self_closing_element"
-    ),
   }
 )
 require("nvim-autopairs.completion.compe").setup({ map_cr = true, map_complete = true })
