@@ -79,5 +79,9 @@ M.pull_request = {
   show_pr_diff = "<space>pd",
   remove_reviewer = "<space>vd",
 }
+M.fterm = {
+  toggle = "<A-i>",
+  lzygit = "<A-g>",
+}
 
 return M

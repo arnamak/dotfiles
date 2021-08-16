@@ -23,6 +23,7 @@ return packer.startup(
     use "nvim-treesitter/playground"
     use "arnamak/stay-centered.nvim"
     use "kyazdani42/nvim-web-devicons"
+    use { "npxbr/glow.nvim" }
     use "JoosepAlviste/nvim-ts-context-commentstring"
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
     use { "arnamak/nvim-nonicons", requires = { "kyazdani42/nvim-web-devicons" } }
@@ -38,6 +39,8 @@ return packer.startup(
       setup = function()
         require("editor-settings").blankline()
       end,
+      -- requires = { "nvim-treesitter/nvim-treesitter" },
+      after = { "nvim-treesitter" },
     }
     use {
       "glepnir/galaxyline.nvim",
@@ -52,6 +55,12 @@ return packer.startup(
       "pwntester/octo.nvim",
       config = function()
         require"octo".setup()
+      end,
+    }
+    use {
+      "numtostr/FTerm.nvim",
+      config = function()
+        require("FTerm").setup()
       end,
     }
     use "gennaro-tedesco/nvim-peekup"

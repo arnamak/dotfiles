@@ -25,6 +25,12 @@ map("i", toc.native.insert_move_cursor_r, [[<Right>]])
 map("n", toc.files.buffer, [[:JABSOpen<CR>]])
 map("n", toc.files.browse, [[:NvimTreeToggle<CR>]])
 -- Files--
+-- Lazygit--
+map("n", toc.fterm.toggle, [[:lua require('FTerm').toggle()<CR>]])
+map("t", toc.fterm.toggle, [[:lua require('FTerm').toggle()<CR>]])
+map("n", toc.fterm.lzygit, [[:lua require('FTerm')__fterm_lazygit()<CR>]])
+map("t", toc.fterm.lzygit, [[:lua require('FTerm')__fterm_lazygit()<CR>]])
+-- -- Lazygit--
 -- LSP--
 map("n", toc.jump.lsp_defs, [[:LspDef<CR>]])
 map("n", toc.jump.lsp_type, [[:LspTypeDef<CR>]])
@@ -37,9 +43,7 @@ map("n", toc.show.lsp_sigs, [[:lua require('lspsaga.signaturehelp').signature_he
 map("n", toc.action.line_d, [[:lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>]])
 map("v", toc.action.codeac, [[:<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]])
 -- LSP--
-
 -- Telescope--
---
 map("n", toc.telescope.buf_file, [[:lua require('telescope.builtin').buffers()<CR>]])
 map("n", toc.telescope.builtins, [[:lua require('telescope.builtin').builtin()<CR>]])
 map("n", toc.telescope.map_norm, [[:lua require('telescope.builtin').keymaps()<CR>]])

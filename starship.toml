@@ -1,0 +1,49 @@
+# Inserts a blank line between shell prompts
+add_newline = false
+format = """
+[┌────────$git_branch────────⦁](dimmed cyan)$memory_usage
+[│](dimmed cyan)$directory$git_status
+(dimmed cyan)$character$git_state """
+[character]                            # The name of the module we are configuring is "character"
+success_symbol = "[└⨠](dimmed cyan)"
+error_symbol = "[└⨠](dimmed red)"
+
+[lua]
+format = "[ ](dimmed blue)"
+
+[directory]
+truncation_length = 2
+truncate_to_repo = true
+truncation_symbol = ""
+style = "dimmed yellow" # cyan -- substrata theme
+fish_style_pwd_dir_length = 0
+
+[git_branch]
+format = "[$symbol$branch](green)"
+symbol = ""
+style = "dimmed yellow" # black -- substrata theme
+
+[git_state]
+format = "[$state](dimmed yellow)" # black -- substrata theme
+
+[git_status]
+style = "blue" # black -- substrata theme
+diverged = "⧨"
+ahead = "△"
+behind = "▽"
+untracked = "⧇ "
+modified = "⧆ "
+staged = "⧈ "
+stashed = ""
+format = '([$all_status$ahead_behind]($style)) '
+
+[kubernetes]
+disabled = true
+style = "dimmed cyan" 
+
+[memory_usage]
+disabled = false
+threshold = -1
+symbol = " "
+style = "dimmed green"
+format = "[ mem:${ram}]($style)"

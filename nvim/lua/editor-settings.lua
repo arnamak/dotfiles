@@ -34,7 +34,8 @@ win.number = true -- Display line numbers
 win.numberwidth = 2 -- Width of the number column
 win.cursorline = true -- Highlight the screen line of the cursor
 win.signcolumn = "yes" -- Always show the sign column
-win.foldmethod = "syntax"
+win.foldmethod = "syntax" -- I don't know how anything folding related works
+win.colorcolumn = "99999" -- Resolves an issue with indent_blankline and blank lines being highlighted
 
 -- Buffer
 opt.tabstop = 2 -- Within a buffer, the space given to a tab
@@ -57,12 +58,52 @@ vim.g.loaded_2html_plugin = 1 -- Disable conversion of the entire vim file to ht
 
 local M = {}
 M.blankline = function()
-  vim.g.indentLine_enabled = 1
-  vim.g.indent_blankline_char = "▏"
-  vim.g.indent_blankline_use_treesitter = true
-  vim.g.indent_blankline_show_first_indent_level = false
-  vim.g.indent_blankline_buftype_exclude = { "terminal" }
+  vim.g.indent_blankline_char = "│"
+  vim.g.indent_blankline_show_first_indent_level = true
+  vim.g.indent_blankline_filetype_exclude = {
+    "startify",
+    "dashboard",
+    "dotooagenda",
+    "log",
+    "fugitive",
+    "gitcommit",
+    "packer",
+    "vimwiki",
+    "markdown",
+    "json",
+    "txt",
+    "vista",
+    "help",
+    "todoist",
+    "NvimTree",
+    "peekaboo",
+    "git",
+    "TelescopePrompt",
+    "undotree",
+    "flutterToolsOutline",
+
+    "", -- for all buffers without a file type
+  }
+  vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
   vim.g.indent_blankline_show_trailing_blankline_indent = false
-  vim.g.indent_blankline_filetype_exclude = { "help", "terminal", "dashboard" }
+  vim.g.indent_blankline_show_current_context = true
+  vim.g.indent_blankline_context_patterns = {
+    "class",
+    "function",
+    "method",
+    "block",
+    "list_literal",
+    "selector",
+    "^if",
+    "^table",
+    "if_statement",
+    "while",
+    "for",
+  }
+
+  vim.g.indent_blankline_strict_tabs = true
+  vim.g.indent_blankline_show_current_context = true
+  -- because lazy load indent-blankline so need readd this autocmd
+  -- vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")
 end
 return M

@@ -10,6 +10,7 @@ local gvcs = require("galaxyline.provider_vcs")
 local icons = require("nvim-nonicons")
 local condition = require("galaxyline.condition")
 local lsp_stat = require("lsp-status")
+gl.short_line_list = { "packer", "NvimTree", "term" }
 local colors = {
   white = "#eff0eb",
   cyan = "#2e313d",
@@ -28,11 +29,6 @@ local colors = {
   faded_red = "#cf8164",
 }
 
-local current_func_visible = function()
-  local tsh = require("vim.treesitter.highlighter")
-  local tsu = require("nvim-treesitter.ts_utils")
-
-end
 gls.left[1] = {
   StartGap = {
     provider = function()
@@ -99,7 +95,7 @@ gls.left[5] = {
     provider = function()
       return " "
     end,
-    condition = condition.buffer_not_empty or current_func_visible,
+    condition = condition.buffer_not_empty,
     separator = "ꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏ",
     separator_highlight = { colors.faded_cyan },
   },
