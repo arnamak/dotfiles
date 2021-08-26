@@ -21,6 +21,14 @@ M.telescope = {
   lsp_refs = "tr",
   git_bran = "tb",
   builtins = "ti",
+  dap_cmds = "td",
+  dap_brks = "tj",
+}
+M.dap = {
+  dap_start = "<leader>js",
+  dap_setbk = "<leader>jj",
+  dap_uitog = "<leader>ju",
+  dap_close = "<leader>jc",
 }
 M.show = {
   lsp_docs = "K",
@@ -36,6 +44,16 @@ M.action = {
 M.jump = {
   lsp_defs = "gd",
   lsp_type = "gt",
+}
+M.bar = {
+  pickbyid = "<A-p>",
+  next_tab = "<A-Tab>",
+  moveback = "<S-A-h>",
+  moveforw = "<S-A-l>",
+  closetab = "<A-Esc>",
+  previous = "<S-A-Tab>",
+  allbutme = "<S-A-Esc>",
+  orgbydir = "<Space>bd",
 }
 M.native = {
   insert_save_and_quit = "jj",

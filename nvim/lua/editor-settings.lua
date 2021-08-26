@@ -34,7 +34,7 @@ win.number = true -- Display line numbers
 win.numberwidth = 2 -- Width of the number column
 win.cursorline = true -- Highlight the screen line of the cursor
 win.signcolumn = "yes" -- Always show the sign column
-win.foldmethod = "syntax" -- I don't know how anything folding related works
+win.foldmethod = "manual" -- I don't know how anything folding related works
 win.colorcolumn = "99999" -- Resolves an issue with indent_blankline and blank lines being highlighted
 
 -- Buffer
@@ -105,5 +105,13 @@ M.blankline = function()
   vim.g.indent_blankline_show_current_context = true
   -- because lazy load indent-blankline so need readd this autocmd
   -- vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")
+  -- vim.g.indentLine_enabled = 1
+
+  -- vim.g.indent_blankline_char = "▏"
+  -- vim.g.indent_blankline_use_treesitter = true
+  -- vim.g.indent_blankline_show_first_indent_level = false
+  -- vim.g.indent_blankline_buftype_exclude = { "terminal" }
+  -- vim.g.indent_blankline_show_trailing_blankline_indent = false
+  -- vim.g.indent_blankline_filetype_exclude = { "help", "terminal", "dashboard" }
 end
 return M

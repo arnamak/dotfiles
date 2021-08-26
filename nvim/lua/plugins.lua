@@ -10,6 +10,7 @@ return packer.startup(
     use "nvim-lua/popup.nvim"
     use "p00f/nvim-ts-rainbow"
     use "onsails/lspkind-nvim"
+    use "mboughaba/i3config.vim"
     use "glepnir/lspsaga.nvim"
     use "neovim/nvim-lspconfig"
     use "nvim-lua/plenary.nvim"
@@ -65,5 +66,10 @@ return packer.startup(
     }
     use "gennaro-tedesco/nvim-peekup"
     use "nvim-lua/lsp-status.nvim"
+    use "jbyuki/one-small-step-for-vimkind"
+    use "mfussenegger/nvim-dap"
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+    use "nvim-telescope/telescope-dap.nvim"
+    use "theHamsta/nvim-dap-virtual-text"
   end
 )

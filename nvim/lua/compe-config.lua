@@ -14,7 +14,7 @@ require("compe").setup {
   resolve_timeout = 800,
   incomplete_delay = 400,
   documentation = {
-    border = { "", "", "", " ", "", "", "", " " },
+    border = { "|", "", "", " ", "", "", "", " " },
     winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
     max_width = 120,
     min_width = 60,

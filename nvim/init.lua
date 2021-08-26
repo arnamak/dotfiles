@@ -13,9 +13,21 @@ require("term-config")
 require("lightspeed-config")
 require("stay-centered")
 require("onedark").setup()
-require("nvim-peekup.config")
 require("dap-config")
 require("dap-ui")
-vim.api.nvim_command("autocmd TermOpen * :lua require('util.change-terminal-ftype').changeTerminalFileType()")
--- require("util.change-terminal-ftype")
--- require("indent-config")
+
+--
+vim.api.nvim_command(
+  [[
+    autocmd TermOpen * :lua require('util.change-terminal-ftype').changeTerminalFileType()
+  ]]
+)
+-- vim.api.nvim_exec(
+--   [[
+--     augroup remember_folds
+--       autocmd!
+--       autocmd BufWinLeave * :call mkview 1
+--       autocmd BufWinEnter * silent! :call loadview 1
+--     augroup END
+--   ]], true
+-- )
