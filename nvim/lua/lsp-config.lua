@@ -1,6 +1,10 @@
 local nvim_lsp = require("lspconfig")
-require("lspsaga").init_lsp_saga()
 local util = require("lspconfig").util
+-- Formatters
+local eslintConfig = require("lsp/efm/eslint")
+local prettierConfig = require("lsp/efm/prettier")
+local luaConfig = require("lsp/efm/lua")
+-- Plugins
 local lsp_status = require("lsp-status")
 lsp_status.config(
   {
@@ -19,24 +23,26 @@ require("lsp-kind")
 -- Typescript--
 -- Requires eslint_d (npm i -g eslint_d)
 -- Requires typescript (npm i -g typescript)
--- Requires prettierd (npm i -g @fzousa/prettierd)
--- Requires typescript (npm i -g typescript-language-server)
--- Requires diagnosticls (npm i -g diagnostic-languageserver)
-local format_async = function(err, _, result, _, bufnr)
+-- Requires prettierd (npm i -g @fsouza/prettierd)
+-- Requires typescript-language-server (npm i -g typescript-language-server)
+-- Install efm-language-server - (requires Go) - go get github.com/mattn/efm-langserver
+-- npm i -g eslint_d typescript typescript-language-server @fsouza/prettierd
+vim.lsp.handlers["textDocument/formatting"] = function(err, result, ctx)
+  -- https://github.com/lukas-reineke/dotfiles/blob/0d0b5e6112ade48de5f2d652cc2b54cb16950e57/vim/lua/lsp/handlers.lua#L1
   if err ~= nil or result == nil then
     return
   end
-  if not vim.api.nvim_buf_get_option(bufnr, "modified") then
+  if vim.api.nvim_buf_get_var(ctx.bufnr, "init_changedtick") == vim.api.nvim_buf_get_var(ctx.bufnr, "changedtick") then
     local view = vim.fn.winsaveview()
-    vim.lsp.util.apply_text_edits(result, bufnr)
+    vim.lsp.util.apply_text_edits(result, ctx.bufnr)
     vim.fn.winrestview(view)
-    if bufnr == vim.api.nvim_get_current_buf() then
-      vim.api.nvim_command("noautocmd :update")
+    if ctx.bufnr == vim.api.nvim_get_current_buf() then
+      vim.b.saving_format = true
+      vim.cmd [[update]]
+      vim.b.saving_format = false
     end
   end
 end
-
-vim.lsp.handlers["textDocument/formatting"] = format_async
 
 _G.lsp_organize_imports = function()
   local params = { command = "_typescript.organizeImports", arguments = { vim.api.nvim_buf_get_name(0) }, title = "" }
@@ -45,7 +51,7 @@ end
 
 local on_attach = function(client)
   vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
-  vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
+  vim.cmd("command! LspFormatting lua require('lsp-formatting').format()")
   vim.cmd("command! LspCodeAction lua vim.lsp.buf.code_action()")
   vim.cmd("command! LspHover lua vim.lsp.buf.hover()")
   vim.cmd("command! LspRename lua vim.lsp.buf.rename()")
@@ -77,34 +83,6 @@ nvim_lsp.tsserver.setup {
     on_attach(client)
   end,
 }
-local filetypes = { tscss = "eslint", typescript = "eslint", typescriptreact = "eslint" }
-local linters = {
-  eslint = {
-    debounce = 100,
-    command = "eslint_d",
-    sourceName = "eslint",
-    rootPatterns = { ".eslintrc.js", "package.json" },
-    args = { "--stdin", "--stdin-filename", "%filepath", "--format", "json" },
-    parseJson = {
-      line = "line",
-      column = "column",
-      endLine = "endLine",
-      security = "severity",
-      endColumn = "endColumn",
-      errorsRoot = "[0].messages",
-      message = "${message} [${ruleId}]",
-    },
-    securities = { [2] = "error", [1] = "warning" },
-  },
-}
-local formatters = { prettier = { command = "prettierd", args = { "%filepath" } } }
-local formatFiletypes = { typescript = "prettier", typescriptreact = "prettier" }
-nvim_lsp.diagnosticls.setup {
-  on_attach = on_attach,
-  filetypes = vim.tbl_keys(filetypes),
-  root_dir = util.root_pattern("package.json"),
-  init_options = { filetypes = filetypes, linters = linters, formatters = formatters, formatFiletypes = formatFiletypes },
-}
 -- Typescript--
 
 -- Lua--
@@ -133,15 +111,34 @@ nvim_lsp.sumneko_lua.setup {
   },
   vim.api.nvim_command([[autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)]]),
 }
--- TODO: I should probably use one of efm or diagnosticls
-nvim_lsp.efm.setup {
-  filetypes = { "lua" },
-  root_dir = util.root_pattern(".lua-format"),
-  init_options = { documentFormatting = true },
-  settings = { languages = { lua = { { formatCommand = "lua-format -i", formatStdin = true } } } },
-}
 -- Lua--
 
+-- EFM--
+nvim_lsp.efm.setup(
+  {
+    on_attach = on_attach,
+    init_options = { documentFormatting = true },
+    root_dir = util.root_pattern("package.json", ".lua-format"),
+    settings = {
+      rootMarkers = { "package.json", ".lua-format" },
+      lintDebounce = 100,
+      languages = {
+        typescript = { prettierConfig, eslintConfig },
+        typescriptreact = { prettierConfig, eslintConfig },
+        lua = { luaConfig },
+        -- javascript = { prettierConfig, eslintConfig },
+        -- javascriptreact = { prettierConfig, eslintConfig },
+      },
+      filetypes = {
+        "typescript",
+        "typescriptreact",
+        "lua",
+        -- "javascript", "javascriptreact",
+      },
+    },
+  }
+)
+-- EFM--
 -- CSS--
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities.textDocument.completion.completionItem.snippetSupport = true

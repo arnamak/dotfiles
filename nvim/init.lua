@@ -1,7 +1,9 @@
 require("plugins")
 require("lsp-config")
+require("lspsaga-config")
 require("telescope-config")
 require("file-tree")
+require("trouble-config")
 require("editor-settings")
 require("compe-config")
 require("kommentary-config")
@@ -13,8 +15,7 @@ require("term-config")
 require("lightspeed-config")
 require("stay-centered")
 require("onedark").setup()
-require("dap-config")
-require("dap-ui")
+require("iswap-config")
 
 --
 vim.api.nvim_command(

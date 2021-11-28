@@ -1,8 +1,8 @@
 local M = {}
 -- Table of Contents--
 M.files = {
-  recent = "<Leader>v",
-  buffer = "<Leader>b",
+  -- recent = "<Leader>v",
+  -- buffer = "<Leader>b",
   browse = "<Leader>n",
 }
 M.compe = {
@@ -21,14 +21,14 @@ M.telescope = {
   lsp_refs = "tr",
   git_bran = "tb",
   builtins = "ti",
-  dap_cmds = "td",
-  dap_brks = "tj",
 }
-M.dap = {
-  dap_start = "<leader>js",
-  dap_setbk = "<leader>jj",
-  dap_uitog = "<leader>ju",
-  dap_close = "<leader>jc",
+M.trouble = {
+  open_close = "te",
+  -- references = "tr",
+  page_diags = "td",
+  dirs_diags = "tw",
+  -- quickfixes = "tq",
+  -- locs_lists = "tl",
 }
 M.show = {
   lsp_docs = "K",
@@ -45,61 +45,17 @@ M.jump = {
   lsp_defs = "gd",
   lsp_type = "gt",
 }
-M.bar = {
-  pickbyid = "<A-p>",
-  next_tab = "<A-Tab>",
-  moveback = "<S-A-h>",
-  moveforw = "<S-A-l>",
-  closetab = "<A-Esc>",
-  previous = "<S-A-Tab>",
-  allbutme = "<S-A-Esc>",
-  orgbydir = "<Space>bd",
-}
 M.native = {
   insert_save_and_quit = "jj",
   insert_move_cursor_l = "<C-s>",
   insert_move_cursor_r = "<C-f>",
 }
-M.octo_files = {
-  next = "j",
-  prev = "k",
-  select = "<CR>",
-  refresh = "<C-r>",
-}
-M.issue = {
-  list = "<space>li",
-}
-M.octo = {
-  reload = "<C-r>",
-  browser = "<C-b>",
-  copy_url = "<C-y>",
-  add_comment = "<space>co",
-  next_comment = "<leader>n",
-  prev_comment = "<leader>N",
-  delete_comment = "<space>cdo",
-}
-M.review = {
-  focus = "<C-e>",
-  files = "<C-E>",
-  approve = "<C-a>",
-  comment = "<C-m>",
-  next_thread = "]t",
-  prev_thread = "[t",
-  close_tab = "<C-c>",
-  next_entry = "<leader>sn",
-  prev_entry = "<leader>sp",
-  add_suggestion = "<leader>sa",
-}
-M.pull_request = {
-  merge = "<C-x>pm",
-  checkout = "<space>gc",
-  list_commits = "<space>pc",
-  show_pr_diff = "<space>pd",
-  remove_reviewer = "<space>vd",
-}
 M.fterm = {
   toggle = "<A-i>",
   lzygit = "<A-g>",
+}
+M.iswap = {
+  swapselect = "<A-d>",
 }
 
 return M

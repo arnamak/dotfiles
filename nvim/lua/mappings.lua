@@ -22,7 +22,7 @@ map("i", toc.native.insert_move_cursor_l, [[<Left>]])
 map("i", toc.native.insert_move_cursor_r, [[<Right>]])
 -- Native--
 -- Files--
-map("n", toc.files.buffer, [[:JABSOpen<CR>]])
+-- map("n", toc.files.buffer, [[:JABSOpen<CR>]])
 map("n", toc.files.browse, [[:NvimTreeToggle<CR>]])
 -- Files--
 -- Lazygit--
@@ -31,16 +31,6 @@ map("t", toc.fterm.toggle, [[:lua require('FTerm').toggle()<CR>]])
 map("n", toc.fterm.lzygit, [[:lua require('FTerm')__fterm_lazygit()<CR>]])
 map("t", toc.fterm.lzygit, [[:lua require('FTerm')__fterm_lazygit()<CR>]])
 -- -- Lazygit--
--- Bar--
-map("n", toc.bar.previous, [[:BufferPrevious<CR>]])
-map("n", toc.bar.next_tab, [[:BufferNext<CR>]])
-map("n", toc.bar.moveback, [[:BufferMovePrevious<CR>]])
-map("n", toc.bar.moveforw, [[:BufferMoveNext<CR>]])
-map("n", toc.bar.closetab, [[:BufferClose<CR>]])
-map("n", toc.bar.allbutme, [[:BufferCloseAllButCurrent<CR>]])
-map("n", toc.bar.pickbyid, [[:BufferPick<CR>]])
-map("n", toc.bar.orgbydir, [[:BufferOrderByDirectory<CR>]])
--- Bar--
 -- LSP--
 map("n", toc.jump.lsp_defs, [[:LspDef<CR>]])
 map("n", toc.jump.lsp_type, [[:LspTypeDef<CR>]])
@@ -53,16 +43,6 @@ map("n", toc.show.lsp_sigs, [[:lua require('lspsaga.signaturehelp').signature_he
 map("n", toc.action.line_d, [[:lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>]])
 map("v", toc.action.codeac, [[:<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]])
 -- LSP--
--- Dap--
-map("n", toc.dap.dap_close, [[:lua require('dap').close()<CR>]])
-map("n", toc.dap.dap_start, [[:lua require('dap').continue()<CR>]])
-map("n", toc.dap.dap_uitog, [[:lua require('dapui').toggle()<CR>]])
-map("n", toc.dap.dap_setbk, [[:lua require('dap').toggle_breakpoint()<CR>]])
--- Dap--
--- Telescope-dap--
-map("n", toc.telescope.dap_cmds, [[:lua require('telescope').extensions.dap.commands()<CR>]])
-map("n", toc.telescope.dap_brks, [[:lua require('telescope').extensions.dap.list_breakpoints()<CR>]])
--- Telescope-dap--
 -- Telescope--
 map("n", toc.telescope.buf_file, [[:lua require('telescope.builtin').buffers()<CR>]])
 map("n", toc.telescope.builtins, [[:lua require('telescope.builtin').builtin()<CR>]])
@@ -74,6 +54,14 @@ map("n", toc.telescope.all_file, [[:lua require('telescope.builtin').find_files(
 map("n", toc.telescope.git_bran, [[:lua require('telescope.builtin').git_branches()<CR>]])
 map("n", toc.telescope.lsp_refs, [[:lua require('telescope.builtin').lsp_references()<CR>]])
 -- Telescope--
+-- Trouble--
+map("n", toc.trouble.open_close, [[:TroubleToggle<CR>]])
+-- map("n", toc.trouble.locs_lists, [[:Trouble loclist<CR>]])
+-- map("n", toc.trouble.quickfixes, [[:Trouble quickfix<CR>]])
+-- map("n", toc.trouble.references, [[:Trouble lsp_references<CR>]])
+map("n", toc.trouble.page_diags, [[:Trouble lsp_document_diagnostics<CR>]])
+map("n", toc.trouble.dirs_diags, [[:Trouble lsp_workspace_diagnostics<CR>]])
+-- Trouble--
 -- Completion--
 local completion_opts = { silent = true, expr = true }
 map("i", toc.compe.complete, [[v:lua.tab_complete()]], completion_opts)
@@ -82,3 +70,6 @@ map("i", toc.compe.backward, [[v:lua.s_tab_complete()]], completion_opts)
 map("s", toc.compe.backward, [[v:lua.s_tab_complete()]], completion_opts)
 map("i", toc.compe.confirms, [[compe#confirm({ 'keys': '<CR>', 'select': v:true })]], completion_opts)
 -- Completion--
+-- iSwap--
+map("n", toc.iswap.swapselect, [[:ISwapWith<CR>]])
+-- iSwap--

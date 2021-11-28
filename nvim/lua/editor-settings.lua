@@ -12,7 +12,7 @@ opt.cmdheight = 1 -- Number of screen lines to use for the command-line
 opt.laststatus = 2 -- Always display the status line
 opt.showmode = false -- 'false' disables showing which mode vim is in below the statusline
 opt.sidescroll = 1 -- Defines the min amount of columns the screen will move on a horizontal scroll
-opt.shortmess = "acIAF" -- Shortens or disables messaging in the command line
+opt.shortmess = "actIAFTW" -- Shortens or disables messaging in the command line
 opt.scrolloff = 0 -- Defines how far "off" you can scroll
 opt.undofile = true -- Store undo history
 opt.smarttab = false -- When on, adheres to shiftwidth when at the start of the line
@@ -45,6 +45,7 @@ opt.expandtab = true -- Use spaces for tabs in insert mode
 opt.swapfile = false -- Disable swap files
 opt.smartindent = true -- Autoindenting when starting a new line (should this be turned off? Re: LSP)
 
+vim.g.silent = 1
 vim.g.loaded_tar = 1 -- Disable vim tar plugin
 vim.g.loaded_spec = 1 -- Disable weird buffer options
 vim.g.loaded_gzip = 1 -- Disable vim gzip plugin

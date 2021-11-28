@@ -96,7 +96,6 @@ gls.left[5] = {
       return " "
     end,
     condition = condition.buffer_not_empty,
-    separator = "ꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏ",
     separator_highlight = { colors.faded_cyan },
   },
 }
@@ -141,7 +140,6 @@ gls.left[9] = {
       return " "
     end,
     condition = condition.buffer_not_empty,
-    separator = "ꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏꞏ",
     separator_highlight = { colors.white, colors.white },
   },
 }
