@@ -49,6 +49,9 @@ _G.lsp_organize_imports = function()
   vim.lsp.buf.execute_command(params)
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+
 local on_attach = function(client)
   vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
   vim.cmd("command! LspFormatting lua require('lsp-formatting').format()")
@@ -63,7 +66,8 @@ local on_attach = function(client)
   vim.cmd("command! LspDiagNext lua vim.lsp.diagnostic.goto_next()")
   vim.cmd("command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
   vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
-  client.capabilities = vim.tbl_extend("keep", client.capabilities or {}, lsp_status.capabilities)
+  client.capabilities = capabilities
+  lsp_status.on_attach(client)
   if client.resolved_capabilities.document_formatting then
     vim.api.nvim_exec(
       [[
@@ -113,9 +117,11 @@ nvim_lsp.sumneko_lua.setup {
 }
 -- Lua--
 
+
 -- EFM--
 nvim_lsp.efm.setup(
   {
+    capabilities = capabilities,
     on_attach = on_attach,
     init_options = { documentFormatting = true },
     root_dir = util.root_pattern("package.json", ".lua-format"),

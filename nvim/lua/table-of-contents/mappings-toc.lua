@@ -5,12 +5,12 @@ M.files = {
   -- buffer = "<Leader>b",
   browse = "<Leader>n",
 }
-M.compe = {
-  confirms = "<CR>",
-  quit_all = "<C-e>",
-  complete = "<Tab>",
-  backward = "<S-Tab>",
-}
+-- M.compe = {
+--   confirms = "<CR>",
+--   quit_all = "<C-e>",
+--   complete = "<Tab>",
+--   backward = "<S-Tab>",
+-- }
 M.telescope = {
   mru_file = "tt",
   buf_file = "ty",
@@ -20,6 +20,7 @@ M.telescope = {
   map_norm = "tk",
   lsp_refs = "tr",
   git_bran = "tb",
+  zox_list = "tl",
   builtins = "ti",
 }
 M.trouble = {

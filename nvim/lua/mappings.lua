@@ -53,6 +53,7 @@ map("n", toc.telescope.tag_help, [[:lua require('telescope.builtin').help_tags()
 map("n", toc.telescope.all_file, [[:lua require('telescope.builtin').find_files()<CR>]])
 map("n", toc.telescope.git_bran, [[:lua require('telescope.builtin').git_branches()<CR>]])
 map("n", toc.telescope.lsp_refs, [[:lua require('telescope.builtin').lsp_references()<CR>]])
+map("n", toc.telescope.zox_list, [[:lua require("telescope").extensions.zoxide.list({})<CR>]])
 -- Telescope--
 -- Trouble--
 map("n", toc.trouble.open_close, [[:TroubleToggle<CR>]])
@@ -63,12 +64,12 @@ map("n", toc.trouble.page_diags, [[:Trouble lsp_document_diagnostics<CR>]])
 map("n", toc.trouble.dirs_diags, [[:Trouble lsp_workspace_diagnostics<CR>]])
 -- Trouble--
 -- Completion--
-local completion_opts = { silent = true, expr = true }
-map("i", toc.compe.complete, [[v:lua.tab_complete()]], completion_opts)
-map("s", toc.compe.complete, [[v:lua.tab_complete()]], completion_opts)
-map("i", toc.compe.backward, [[v:lua.s_tab_complete()]], completion_opts)
-map("s", toc.compe.backward, [[v:lua.s_tab_complete()]], completion_opts)
-map("i", toc.compe.confirms, [[compe#confirm({ 'keys': '<CR>', 'select': v:true })]], completion_opts)
+-- local completion_opts = { silent = true, expr = true }
+-- map("i", toc.compe.complete, [[v:lua.tab_complete()]], completion_opts)
+-- map("s", toc.compe.complete, [[v:lua.tab_complete()]], completion_opts)
+-- map("i", toc.compe.backward, [[v:lua.s_tab_complete()]], completion_opts)
+-- map("s", toc.compe.backward, [[v:lua.s_tab_complete()]], completion_opts)
+-- map("i", toc.compe.confirms, [[compe#confirm({ 'keys': '<CR>', 'select': v:true })]], completion_opts)
 -- Completion--
 -- iSwap--
 map("n", toc.iswap.swapselect, [[:ISwapWith<CR>]])

@@ -13,7 +13,6 @@ npairs.setup(
     },
   }
 )
-require("nvim-autopairs.completion.compe").setup({ map_cr = true, map_complete = true })
 
 M.config = function()
   local config = require("nvim-treesitter.configs")
@@ -47,6 +46,7 @@ M.config = function()
     autotag = { enable = true },
     autopairs = { enable = true },
     highlight = { enable = true, use_languagetree = true },
+    refactor = { highlight_definitions = { enable = true } },
     rainbow = { enable = true, extended_mode = true, max_file_lines = 1000000 },
   }
 end

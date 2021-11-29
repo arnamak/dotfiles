@@ -3,32 +3,52 @@ local use = packer.use
 
 return packer.startup(
   function()
+    use "npxbr/glow.nvim"
+    use {
+      "L3MON4D3/LuaSnip",
+      config = function()
+        require("luasnip").config.set_config { enable_autosnippets = true }
+      end,
+    }
+    use "hrsh7th/cmp-path"
+    use "hrsh7th/cmp-calc"
+    use "hrsh7th/nvim-cmp"
     use "matbme/JABS.nvim"
     use "mizlan/iswap.nvim"
     use "folke/trouble.nvim"
-    use "hrsh7th/nvim-compe"
+    use "hrsh7th/cmp-buffer"
     use "tami5/lspsaga.nvim"
     use "b3nj5m1n/kommentary"
     use "windwp/nvim-spectre"
     use "nvim-lua/popup.nvim"
+    use "hrsh7th/cmp-cmdline"
     use "numtostr/FTerm.nvim"
     use "p00f/nvim-ts-rainbow"
     use "onsails/lspkind-nvim"
-    use "mboughaba/i3config.vim"
+    use "hrsh7th/cmp-nvim-lsp"
     use "neovim/nvim-lspconfig"
     use "nvim-lua/plenary.nvim"
     use "windwp/nvim-autopairs"
     use "navarasu/onedark.nvim"
+    -- use "ray-x/cmp-treesitter"
+    use "mboughaba/i3config.vim"
     use "windwp/nvim-ts-autotag"
     use "wbthomason/packer.nvim"
     use "ggandor/lightspeed.nvim"
     use "ethanholz/nvim-lastplace"
+    use "saadparwaiz1/cmp_luasnip"
     use "nvim-treesitter/playground"
     use "arnamak/stay-centered.nvim"
+    use "jvgrootveld/telescope-zoxide"
     use "kyazdani42/nvim-web-devicons"
-    use { "npxbr/glow.nvim" }
+    use "lukas-reineke/cmp-under-comparator"
+    use "hrsh7th/cmp-nvim-lsp-signature-help"
+    use "hrsh7th/cmp-nvim-lsp-document-symbol"
     use "JoosepAlviste/nvim-ts-context-commentstring"
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+    use { "David-Kunz/cmp-npm", requires = { "nvim-lua/plenary.nvim" } }
+    use { "tzachar/cmp-fuzzy-buffer", requires = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" } }
+    use { "tzachar/cmp-fuzzy-path", requires = { "hrsh7th/nvim-cmp", "hrsh7th/cmp-path", "tzachar/fuzzy.nvim" } }
     use { "arnamak/nvim-nonicons", requires = { "kyazdani42/nvim-web-devicons" } }
     use { "nvim-telescope/telescope.nvim", requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } } }
     use {
@@ -94,8 +114,7 @@ return packer.startup(
       after = { "nvim-treesitter" },
     }
     use {
-      "glepnir/galaxyline.nvim",
-      branch = "main",
+      "NTBBloodbath/galaxyline.nvim",
       config = function()
         require "statusline"
       end,
