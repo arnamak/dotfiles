@@ -121,12 +121,6 @@ return packer.startup(
       requires = { "arnamak/nvim-nonicons" },
     }
     use { "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } }
-    use {
-      "pwntester/octo.nvim",
-      config = function()
-        require"octo".setup()
-      end,
-    }
     use "gennaro-tedesco/nvim-peekup"
     use "nvim-lua/lsp-status.nvim"
     use "jbyuki/one-small-step-for-vimkind"
